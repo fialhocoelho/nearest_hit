@@ -4,19 +4,27 @@
 #include <math.h>
 
 
-
 int main (int argc, char *argv[]){
 	int n=3, n_hits = 300000;
 
 	//Opening files
 	
-	float dist[n_hits],x_bag[n_hits],y_bag[n_hits],z_bag[n_hits], x_pred, y_pred, z_pred;
-    	int i = 0;
+	//float dist[n_hits],x_bag[n_hits],y_bag[n_hits],z_bag[n_hits], x_pred, y_pred, z_pred;
+     		
+	float x_pred, y_pred, z_pred;
+
+	float *dist  = malloc(n_hits * sizeof(float));
+	float *x_bag = malloc(n_hits * sizeof(float));
+	float *y_bag = malloc(n_hits * sizeof(float));
+	float *z_bag = malloc(n_hits * sizeof(float));
+	
+
+	int i = 0;
     	FILE *fx, *fy,*fz;
 
-    	fx = fopen("bag_x.dat", "r");
-	fy = fopen("bag_y.dat", "r");
-	fz = fopen("bag_z.dat", "r");
+    	fx = fopen("input_datasets/bag_x.dat", "r");
+	fy = fopen("input_datasets/bag_y.dat", "r");
+	fz = fopen("input_datasets/bag_z.dat", "r");
 
 	for(i=0; i < n_hits; i++){
 		fscanf(fx, "%f", &x_bag[i]);
@@ -46,7 +54,11 @@ int main (int argc, char *argv[]){
                 printf("dist[%d] = %f\n", i, dist[i]);
 		printf("\n");
         }
-
 	
+	free(x_bag);
+	free(y_bag);
+	free(z_bag);
+	
+
 	return 0;
 }
